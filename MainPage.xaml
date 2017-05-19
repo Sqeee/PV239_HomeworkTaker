@@ -5,9 +5,25 @@
     xmlns:local="using:HomeworkTaker"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:UWPToolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <DataTemplate x:Name="HamburDefaultTemplate">
+            <Grid Width="240" Height="48">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <SymbolIcon Grid.Column="0" Symbol="{Binding Icon}" Foreground="White" />
+                <TextBlock Grid.Column="1" Text="{Binding Name}" FontSize="16" VerticalAlignment="Center" Foreground="White" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
 
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <UWPToolkit:HamburgerMenu x:Name="hamburgerMenuControl" PaneBackground="Black" Foreground="White" ItemClick="OnMenuItemClick" ItemTemplate="{StaticResource HamburDefaultTemplate}" OptionsItemClick="OnMenuItemClick" SelectedIndex="1">
+            <Frame x:Name="contentFrame" />
+        </UWPToolkit:HamburgerMenu>
     </Grid>
 </Page>

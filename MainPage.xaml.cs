@@ -25,6 +25,39 @@ namespace HomeworkTaker
         public MainPage()
         {
             this.InitializeComponent();
+            hamburgerMenuControl.ItemsSource = MenuItem.GetItems();
+            contentFrame.Navigate(typeof(TasksListPage));
+        }
+
+        private void OnMenuItemClick(object sender, ItemClickEventArgs e)
+        {
+            var menuItem = e.ClickedItem as MenuItem;
+            contentFrame.Navigate(menuItem.PageType);
+        }
+
+        public class MenuItem
+        {
+            public Symbol Icon { get; set; }
+            public string Name { get; set; }
+            public Type PageType { get; set; }
+
+            public static List<MenuItem> GetItems()
+            {
+                var items = new List<MenuItem>();
+                items.Add(new MenuItem()
+                {
+                    Icon = Symbol.Calendar,
+                    Name = "Subjects",
+                    PageType = typeof(SubjectsListPage)
+                });
+                items.Add(new MenuItem()
+                {
+                    Icon = Symbol.OutlineStar,
+                    Name = "Tasks",
+                    PageType = typeof(TasksListPage)
+                });
+                return items;
+            }
         }
     }
 }
