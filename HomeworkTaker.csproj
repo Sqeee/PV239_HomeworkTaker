@@ -91,45 +91,33 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
-    <None Include="SampleData\SubjectSampleDataSource\SubjectSampleDataSource.xsd" />
-    <None Include="SampleData\TaskSampleDataSource\TaskSampleDataSource.xsd" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\ComboBoxItemToDayOfWeekConverter.cs" />
-    <Compile Include="Models\ISubjectManager.cs" />
-    <Compile Include="Models\ITasksManager.cs" />
-    <Compile Include="Models\Subject.cs" />
-    <Compile Include="Models\SubjectsManager.cs" />
-    <Compile Include="Models\Task.cs" />
-    <Compile Include="Pages\AddSubjectPage.xaml.cs">
-      <DependentUpon>AddSubjectPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\AddTaskPage.xaml.cs">
-      <DependentUpon>AddTaskPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Data\DAL.cs" />
+    <Compile Include="Models\SubjectModel.cs" />
+    <Compile Include="Models\SubjectsModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SchedulePage.xaml.cs">
+      <DependentUpon>SchedulePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\AddSubjectPage.xaml.cs">
+      <DependentUpon>AddSubjectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\MainSettingsPage.xaml.cs">
+      <DependentUpon>MainSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\SubjectsManagementPage.xaml.cs">
+      <DependentUpon>SubjectsManagementPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Pages\SubjectsListPage.xaml.cs">
-      <DependentUpon>SubjectsListPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\TasksListPage.xaml.cs">
-      <DependentUpon>TasksListPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SampleData\SubjectSampleDataSource\SubjectSampleDataSource.xaml.cs">
-      <DependentUpon>SubjectSampleDataSource.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SampleData\TaskSampleDataSource\TaskSampleDataSource.xaml.cs">
-      <DependentUpon>TaskSampleDataSource.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModels\SubjectsViewModel.cs" />
     <Compile Include="ViewModels\SubjectViewModel.cs" />
-    <Compile Include="ViewModels\TaskViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\ViewModelHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -146,49 +134,31 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
-    <Content Include="SampleData\SubjectSampleDataSource\SubjectSampleDataSource_Files\image01.png" />
-    <Content Include="SampleData\SubjectSampleDataSource\SubjectSampleDataSource_Files\image02.png" />
-    <Content Include="SampleData\SubjectSampleDataSource\SubjectSampleDataSource_Files\image03.png" />
-    <Content Include="SampleData\SubjectSampleDataSource\SubjectSampleDataSource_Files\image04.png" />
-    <Content Include="SampleData\SubjectSampleDataSource\SubjectSampleDataSource_Files\image05.png" />
-    <Content Include="SampleData\TaskSampleDataSource\TaskSampleDataSource_Files\image01.png" />
-    <Content Include="SampleData\TaskSampleDataSource\TaskSampleDataSource_Files\image02.png" />
-    <Content Include="SampleData\TaskSampleDataSource\TaskSampleDataSource_Files\image03.png" />
-    <Content Include="SampleData\TaskSampleDataSource\TaskSampleDataSource_Files\image04.png" />
-    <Content Include="SampleData\TaskSampleDataSource\TaskSampleDataSource_Files\image05.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Pages\AddSubjectPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\AddTaskPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\SubjectsListPage.xaml">
+    <Page Include="Pages\SchedulePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\TasksListPage.xaml">
+    <Page Include="Pages\Settings\AddSubjectPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SampleData\SubjectSampleDataSource\SubjectSampleDataSource.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Pages\Settings\MainSettingsPage.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SampleData\TaskSampleDataSource\TaskSampleDataSource.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Pages\Settings\SubjectsManagementPage.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup />

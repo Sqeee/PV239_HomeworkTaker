@@ -26,7 +26,8 @@ namespace HomeworkTaker
         {
             this.InitializeComponent();
             hamburgerMenuControl.ItemsSource = MenuItem.GetItems();
-            contentFrame.Navigate(typeof(TasksListPage));
+            hamburgerMenuControl.SelectedIndex = 0;
+            contentFrame.Navigate(typeof(Pages.SchedulePage));
         }
 
         private void OnMenuItemClick(object sender, ItemClickEventArgs e)
@@ -47,14 +48,20 @@ namespace HomeworkTaker
                 items.Add(new MenuItem()
                 {
                     Icon = Symbol.Calendar,
-                    Name = "Subjects",
-                    PageType = typeof(SubjectsListPage)
+                    Name = "Schedule",
+                    PageType = typeof(Pages.SchedulePage)
                 });
                 items.Add(new MenuItem()
                 {
                     Icon = Symbol.OutlineStar,
                     Name = "Tasks",
-                    PageType = typeof(TasksListPage)
+                    PageType = typeof(Pages.SchedulePage)
+                });
+                items.Add(new MenuItem()
+                {
+                    Icon = Symbol.Setting,
+                    Name = "Settings",
+                    PageType = typeof(Pages.Settings.MainSettingsPage)
                 });
                 return items;
             }

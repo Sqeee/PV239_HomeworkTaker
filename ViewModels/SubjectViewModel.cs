@@ -1,5 +1,4 @@
-﻿using HomeworkTaker.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,109 +6,23 @@ using System.Threading.Tasks;
 
 namespace HomeworkTaker.ViewModels
 {
-    public class SubjectViewModel : ViewModelBase
+    public class SubjectViewModel : NotificationBase<Models.SubjectModel>
     {
-        Subject subject;
-        public bool IsDirty { get; set; }
-
-        public SubjectViewModel(Subject subject)
+        public SubjectViewModel(Models.SubjectModel subject = null) : base(subject) { }
+        public int ID
         {
-            this.subject = subject;
-            this.PropertyChanged += SubjectViewModel_PropertyChanged;
-
+            get { return This.SubjectID; }
+            set { SetProperty(This.SubjectID, value, () => This.SubjectID = value); }
         }
-
-        void SubjectViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            IsDirty = true;
-        }
-
-        public Subject Subject
-        {
-            get { return subject; }
-        }
-
         public string Title
         {
-            get
-            {
-                return subject.Title;
-            }
-            set
-            {
-                if (subject.Title !=  value)
-                {
-                    subject.Title = value;
-                    NotifyPropertyChanged();
-                }
-            }
-
+            get { return This.Title; }
+            set { SetProperty(This.Title, value, () => This.Title = value); }
         }
-
-        public string Description
+        public string TitleShort
         {
-            get
-            {
-                return subject.Description;
-            }
-            set
-            {
-                if (subject.Description != value)
-                {
-                    subject.Description = value;
-                    NotifyPropertyChanged();
-                }
-            }
-
+            get { return This.TitleShort; }
+            set { SetProperty(This.TitleShort, value, () => This.TitleShort = value); }
         }
-
-        public TimeSpan TimeStart
-        {
-            get
-            {
-                return subject.TimeStart;
-            }
-            set
-            {
-                if (subject.TimeStart != value)
-                {
-                    subject.TimeStart = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-
-        public TimeSpan TimeEnd
-        {
-            get
-            {
-                return subject.TimeEnd;
-            }
-            set
-            {
-                if (subject.TimeEnd != value)
-                {
-                    subject.TimeEnd = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-
-        public int DayOfWeek
-        {
-            get
-            {
-                return subject.DayOfWeek;
-            }
-            set
-            {
-                if (subject.DayOfWeek !=  value)
-                {
-                    subject.DayOfWeek = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-
     }
 }

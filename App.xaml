@@ -5,10 +5,4 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:SubjectSampleDataSource="using:Blend.SampleData.SubjectSampleDataSource" xmlns:TaskSampleDataSource="using:Blend.SampleData.TaskSampleDataSource" mc:Ignorable="d"
     x:Class="HomeworkTaker.App"
     RequestedTheme="Light">
-
-    <Application.Resources>
-        <TaskSampleDataSource:TaskSampleDataSource x:Key="TaskSampleDataSource" d:IsDataSource="True"/>
-        <SubjectSampleDataSource:SubjectSampleDataSource x:Key="SubjectSampleDataSource" d:IsDataSource="True"/>
-    </Application.Resources>
-
 </Application>
