@@ -17,7 +17,6 @@
                     <DataTemplate x:DataType="viewModels:SubjectViewModel" >
                         <Border BorderBrush="Black" BorderThickness="1">
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{x:Bind ID, Mode=OneWay}" Foreground="Black"/>
                                 <TextBlock Text="{x:Bind Title, Mode=OneWay}" Foreground="Black"/>
                                 <TextBlock Text="{x:Bind TitleShort, Mode=OneWay}" Foreground="Black"/>
                                 <Button Content="Delete" Click="onDeleteBtnClick"/>

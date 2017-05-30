@@ -9,5 +9,6 @@
 
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Button Content="Subjects management" Click="onSubjectsManagementBtnClick"/>
+        <Button Content="Schedule management" Click="onScheduleManagementBtnClick"/>
     </StackPanel>
 </Page>

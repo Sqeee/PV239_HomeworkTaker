@@ -14,5 +14,10 @@ namespace HomeworkTaker.Pages.Settings
         {
             this.Frame.Navigate(typeof(Pages.Settings.SubjectsManagementPage));
         }
+
+        private void onScheduleManagementBtnClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Pages.Settings.ScheduleManagementPage));
+        }
     }
 }

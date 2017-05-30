@@ -22,7 +22,6 @@ namespace HomeworkTaker.Pages.Settings
         private void onAcceptBtnClick(object sender, RoutedEventArgs e)
         {
             ViewModels.SubjectViewModel subj = new ViewModels.SubjectViewModel();
-            subj.ID = Convert.ToInt32(idTextBox.Text);
             subj.Title = titleTextBox.Text;
             subj.TitleShort = titleShortTextBox.Text;
             Subjects.Add(subj);

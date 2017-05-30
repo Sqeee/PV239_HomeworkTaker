@@ -62,5 +62,14 @@ namespace HomeworkTaker.ViewModels
                 subjects.DeleteSubject(subject);
             }
         }
+        public List<string> GetSubjectsTitleList()
+        {
+            List<string> result = new List<String>();
+            for(int i=0; i<Subjects.Count;i++)
+            {
+                result.Add(Subjects[i].Title);
+            }
+            return result;
+        }
     }
 }

@@ -9,11 +9,6 @@ namespace HomeworkTaker.ViewModels
     public class SubjectViewModel : NotificationBase<Models.SubjectModel>
     {
         public SubjectViewModel(Models.SubjectModel subject = null) : base(subject) { }
-        public int ID
-        {
-            get { return This.SubjectID; }
-            set { SetProperty(This.SubjectID, value, () => This.SubjectID = value); }
-        }
         public string Title
         {
             get { return This.Title; }

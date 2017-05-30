@@ -23,7 +23,7 @@ namespace HomeworkTaker.Models
         {
             for (int i = 0; i < SubjectsList.Count; i++)
             {
-                if (SubjectsList[i].SubjectID == subject.SubjectID)
+                if (SubjectsList[i].Title == subject.Title)
                 {
                     SubjectsList.RemoveAt(i);
                     break;

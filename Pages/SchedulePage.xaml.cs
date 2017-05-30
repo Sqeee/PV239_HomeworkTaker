@@ -8,24 +8,24 @@ namespace HomeworkTaker.Pages
     public sealed partial class SchedulePage : Page
     {
         // TODO 
-        // Implement loading schedule from json.
-        // Implement editing schedule in settings.
         // Implement adding of tasks when subject is clicked
-        private const int MAX_HOURS = 8;
+        private ViewModels.ScheduleViewModel schedule { get; set; }
+        private ViewModels.SubjectsViewModel subjects { get; }
 
         public SchedulePage()
         {
             this.InitializeComponent();
+            schedule = new ViewModels.ScheduleViewModel();
+            subjects = new ViewModels.SubjectsViewModel();
             createSchedule();
         }
 
         private void createSchedule()
         {
             // create header
-            for (int i=1; i<=MAX_HOURS; i++)
+            for (int i = 1; i<=schedule.GetSchedule().MaxHours; i++)
             {
-                ColumnDefinition col = new ColumnDefinition();
-                scheduleGrid.ColumnDefinitions.Add(col);
+                scheduleGrid.ColumnDefinitions.Add(new ColumnDefinition());
                 TextBlock tb = new TextBlock();
                 tb.Text = i.ToString();
                 tb.Foreground = new SolidColorBrush(Windows.UI.Colors.Black);
@@ -41,24 +41,41 @@ namespace HomeworkTaker.Pages
                 Grid.SetColumn(b, i);
             }
             // create rest of schedule
-            for(int i=1; i<6; i++)
+            for(int i = 0; i<5; i++)
             {
-                for(int j=1; j<=MAX_HOURS;j++)
+                for(int j = 0; j< schedule.GetSchedule().MaxHours; j++)
                 {
-                    Button btn = new Button();
-                    btn.Content = "Subject";
-                    btn.Name = i.ToString() + "." + j.ToString();
-                    btn.VerticalAlignment = VerticalAlignment.Stretch;
-                    btn.HorizontalAlignment = HorizontalAlignment.Stretch;
                     Border b = new Border();
-                    b.Child = btn;
                     b.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Black);
                     b.BorderThickness = new Thickness(1);
                     scheduleGrid.Children.Add(b);
-                    Grid.SetRow(b, i);
-                    Grid.SetColumn(b, j);
+                    Grid.SetRow(b, i + 1);
+                    Grid.SetColumn(b, j + 1);
+                    string subject = schedule.GetSchedule().Schedule[i][j];
+                    if(!subjects.GetSubjectsTitleList().Contains(subject))
+                    {
+                        subject = string.Empty;
+                        schedule.GetSchedule().Schedule[i][j] = string.Empty;
+                    }
+
+                    if (subject != string.Empty)
+                    {
+                        Button btn = new Button();
+                        btn.Content = subject;
+                        btn.Name = i.ToString() + "," + j.ToString();
+                        btn.VerticalAlignment = VerticalAlignment.Stretch;
+                        btn.HorizontalAlignment = HorizontalAlignment.Stretch;
+                        btn.Click += new RoutedEventHandler(onSubjectBtnClick);
+                        b.Child = btn;
+                    }
                 }
-            }          
+            }
+         }
+
+        private void onSubjectBtnClick(object sender, RoutedEventArgs e)
+        {
+            string buttonName = ((Button)sender).Name;
+            this.Frame.Navigate(typeof(Pages.Settings.MainSettingsPage),buttonName);
         }
     }
 }
