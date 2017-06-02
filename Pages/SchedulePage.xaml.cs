@@ -62,7 +62,6 @@ namespace HomeworkTaker.Pages
                     {
                         Button btn = new Button();
                         btn.Content = subject;
-                        btn.Name = i.ToString() + "," + j.ToString();
                         btn.VerticalAlignment = VerticalAlignment.Stretch;
                         btn.HorizontalAlignment = HorizontalAlignment.Stretch;
                         btn.Click += new RoutedEventHandler(onSubjectBtnClick);
@@ -74,8 +73,8 @@ namespace HomeworkTaker.Pages
 
         private void onSubjectBtnClick(object sender, RoutedEventArgs e)
         {
-            string buttonName = ((Button)sender).Name;
-            this.Frame.Navigate(typeof(Pages.Settings.MainSettingsPage),buttonName);
+            string subject = ((Button)sender).Content as string;
+            this.Frame.Navigate(typeof(Pages.CreateTaskPage),subject);
         }
     }
 }

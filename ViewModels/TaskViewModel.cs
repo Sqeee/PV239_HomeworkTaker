@@ -1,98 +1,33 @@
-﻿using HomeworkTaker.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace HomeworkTaker.ViewModels
 {
-    class TaskViewModel : ViewModelBase
+    public class TaskViewModel : NotificationBase<Models.TaskModel>
     {
-        Task task;
-
-        public TaskViewModel(Task task)
+        public TaskViewModel(Models.TaskModel task = null) : base(task) { }
+        public int Id
         {
-            this.task = task;
-            this.PropertyChanged += TaskViewModel_PropertyChanged;
+            get { return This.Id; }
+            set { SetProperty(This.Id, value, () => This.Id = value); }
         }
-
-        void TaskViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            IsDirty = true;
-        }
-
-        public Task Task
-        {
-            get { return task; }
-        }
-
-        public string Title
-        {
-            get
-            {
-                return task.Title;
-            }
-            set
-            {
-                if (task.Title != value)
-                {
-                    task.Title = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-
         public string Description
         {
-            get
-            {
-                return task.Description;
-            }
-            set
-            {
-                if (task.Description != value)
-                {
-                    task.Description = value;
-                    NotifyPropertyChanged();
-                }
-            }
+            get { return This.Description; }
+            set { SetProperty(This.Description, value, () => This.Description = value); }
         }
-
-        public Subject Subject
+        public string Subject
         {
-            get
-            {
-                return task.Subject;
-            }
-            set
-            {
-                if (task.Subject != value)
-                {
-                    task.Subject = value;
-                    NotifyPropertyChanged();
-                }
-            }
-
+            get { return This.Subject; }
+            set { SetProperty(This.Subject, value, () => This.Subject = value); }
         }
-
-        public DateTime NotificationTime
+        public DateTime DeadLine
         {
-            get
-            {
-                return task.NotificationTime;
-            }
-            set
-            {
-                if (task.NotificationTime != value)
-                {
-                    task.NotificationTime = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-
-
-        public bool IsDirty { get; set; }
-
+            get { return This.Deadline; }
+            set { SetProperty(This.Deadline, value, () => This.Deadline = value); }
+        }        
     }
 }

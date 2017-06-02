@@ -11,7 +11,6 @@ namespace HomeworkTaker.ViewModels
     public class SubjectsViewModel : ViewModels.NotificationBase
     {
         Models.SubjectsModel subjects;
-
         public SubjectsViewModel()
         {
             subjects = new Models.SubjectsModel();

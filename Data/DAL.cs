@@ -156,4 +156,71 @@ namespace HomeworkTaker.Data
             }
         }
     }
+
+    // Data access layer for tasks
+    public static class TasksDAL
+    {
+        // Returns list of tasks loaded from json
+        public static List<Models.TaskModel>GetTasks()
+        {
+            List<Models.TaskModel> tasks = new List<Models.TaskModel>();
+            JObject tasksJSON;
+            StorageFile tasksFile = null;
+            string content = string.Empty;
+
+            try
+            {
+                var task = Task.Run(async () => { tasksFile = await Windows.Storage.ApplicationData.Current.LocalFolder.GetFileAsync("tasks.json"); });
+                task.Wait();
+                task = Task.Run(async () => { content = await Windows.Storage.FileIO.ReadTextAsync(tasksFile); });
+                task.Wait();
+                tasksJSON = JObject.Parse(content);
+            }
+            catch (Exception ex)
+            {
+                return tasks;
+            }
+
+            for (int i = 0; i < ((JArray)tasksJSON["Tasks"]).Count(); i++)
+            {
+                Models.TaskModel task = new Models.TaskModel();
+                task.Id = (int)(tasksJSON["Tasks"][i]["Id"]);
+                task.Description = (string)(tasksJSON["Tasks"][i]["Description"]);
+                task.Subject = (string)(tasksJSON["Tasks"][i]["Subject"]);
+                task.Deadline = DateTime.ParseExact((string)(tasksJSON["Tasks"][i]["Deadline"]), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                tasks.Add(task);
+            }
+            return tasks;
+        }
+
+        // Store provided schedule into json
+        public static void StoreTasks(List<Models.TaskModel> taskList)
+        {
+            Windows.Storage.StorageFile tasksFile = null;
+            JObject tasksJson = new JObject();
+            JArray tasks = new JArray();
+
+            for (int i = 0; i < taskList.Count; i++)
+            {
+                JObject task = new JObject();
+                task["Id"] = taskList[i].Id;
+                task["Description"] = taskList[i].Description;
+                task["Subject"] = taskList[i].Subject;
+                task["Deadline"] = taskList[i].Deadline.ToString("yyyy-MM-dd HH:mm:ss");
+                tasks.Add(task);
+            }
+            tasksJson["Tasks"] = tasks;
+            try
+            {
+                var task = Task.Run(async () => { tasksFile = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFileAsync("tasks.json", Windows.Storage.CreationCollisionOption.ReplaceExisting); });
+                task.Wait();
+                task = Task.Run(async () => { await Windows.Storage.FileIO.WriteTextAsync(tasksFile, tasksJson.ToString()); });
+                task.Wait();
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+        }
+    }    
 }

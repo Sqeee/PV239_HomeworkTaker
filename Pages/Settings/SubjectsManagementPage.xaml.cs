@@ -28,8 +28,5 @@ namespace HomeworkTaker.Pages.Settings
         {
             Subjects.Delete();
         }
-
-
-
     }
 }

@@ -55,7 +55,7 @@ namespace HomeworkTaker
                 {
                     Icon = Symbol.OutlineStar,
                     Name = "Tasks",
-                    PageType = typeof(Pages.SchedulePage)
+                    PageType = typeof(Pages.TasksPage)
                 });
                 items.Add(new MenuItem()
                 {
