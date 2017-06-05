@@ -47,6 +47,23 @@ namespace HomeworkTaker.Pages
             this.Frame.Navigate(typeof(Pages.SchedulePage));
         }
 
+        private void onIncreaseClick(object sender, RoutedEventArgs e)
+        {
+            int lessons = Convert.ToInt32(numOfLessonsTextBlock.Text);
+            lessons++;
+            numOfLessonsTextBlock.Text = lessons.ToString();
+        }
+
+        private void onDecreaseClick(object sender, RoutedEventArgs e)
+        {
+            int lessons = Convert.ToInt32(numOfLessonsTextBlock.Text);
+            if (lessons > 1)
+            {
+                lessons--;
+            }
+            numOfLessonsTextBlock.Text = lessons.ToString();
+        }
+
         private void onAcceptBtnClick(object sender, RoutedEventArgs e)
         {
             // get DateTime for begining of week
@@ -63,34 +80,40 @@ namespace HomeworkTaker.Pages
             DateTime assigned = mondayDateTime.AddDays(day);
             
             // get date of next lesson
-            int dayOffset = day + 1;
-            if (dayOffset == 5)
-            {
-                dayOffset = 0;
-            }
+            int weekDay = day;
             int lessonOffset = 0;
-            int dayCount = 1;
 
-            while(schedule.Schedule[dayOffset][lessonOffset]!=subject)
+            int deadlineAtLesson = Convert.ToInt32(numOfLessonsTextBlock.Text);
+            DateTime deadline = assigned;
+            while (deadlineAtLesson > 0)
             {
-                lessonOffset++;
-                if(lessonOffset == schedule.MaxHours)
+                int dayCount = 1;
+                weekDay++;
+                if (weekDay == 5)
                 {
-                    dayOffset++;
-                    lessonOffset = 0;
-                    if (dayOffset == 5)
+                    weekDay = 0;
+                    dayCount += 2;
+                }                
+                while (schedule.Schedule[weekDay][lessonOffset] != subject)
+                {
+                    lessonOffset++;
+                    if (lessonOffset == schedule.MaxHours)
                     {
-                        dayOffset = 0;
+                        lessonOffset = 0;
+                        weekDay++;
+                        dayCount++;
+                        if(weekDay==5)
+                        {
+                            weekDay = 0;
+                            dayCount += 2;
+                        }
                     }
-                    dayCount++;                        
-                }
-            }
-            if(day+dayCount>=5)
-            {
-                dayCount += 2;
+                }                
+                deadlineAtLesson--;
+                deadline = deadline.AddDays(dayCount);
             }
 
-            DateTime deadline = assigned.AddDays(dayCount);
+            
             DateTime notification = deadline.Date.AddDays(-1).AddHours(17);            
 
             Models.TaskModel task = new Models.TaskModel();
