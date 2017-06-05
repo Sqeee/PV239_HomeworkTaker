@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HomeworkTaker.Notifications;
 
 namespace HomeworkTaker.Models
 {
@@ -20,9 +21,10 @@ namespace HomeworkTaker.Models
             newTask.Id = getNextFreeId();
             TasksList.Add(newTask);
             Data.TasksDAL.StoreTasks(TasksList);
+            NotificationsManager.AddTaskNotification(newTask);
         }
 
-        public void DeleteSubject(Models.TaskModel task)
+        public void DeleteTask(Models.TaskModel task)
         {
             for (int i = 0; i < TasksList.Count; i++)
             {
@@ -32,6 +34,12 @@ namespace HomeworkTaker.Models
                     break;
                 }
             }
+            Data.TasksDAL.StoreTasks(TasksList);
+            NotificationsManager.RemoveTaskNotification(task);
+        }
+
+        public void StoreTasks()
+        {
             Data.TasksDAL.StoreTasks(TasksList);
         }
 

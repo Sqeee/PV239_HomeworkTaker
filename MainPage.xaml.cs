@@ -36,6 +36,11 @@ namespace HomeworkTaker
             contentFrame.Navigate(menuItem.PageType);
         }
 
+        public void ContentNavigate(Type page)
+        {
+            contentFrame.Navigate(page);
+        }
+
         public class MenuItem
         {
             public Symbol Icon { get; set; }

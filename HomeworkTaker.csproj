@@ -91,6 +91,12 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
+    <None Include="SampleData\SubjectSampleDataSource\SubjectSampleDataSource.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SampleData\TaskSampleDataSource\TaskSampleDataSource.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\DAL.cs" />
@@ -105,6 +111,9 @@
     </Compile>
     <Compile Include="Models\TaskModel.cs" />
     <Compile Include="Models\TasksModel.cs" />
+    <Compile Include="Notifications\NotificationsManager.cs" />
+    <Compile Include="Notifications\TileNotificationsManager.cs" />
+    <Compile Include="Notifications\ToastNotificationsManager.cs" />
     <Compile Include="Pages\CreateTaskPage.xaml.cs">
       <DependentUpon>CreateTaskPage.xaml</DependentUpon>
     </Compile>
@@ -127,6 +136,12 @@
       <DependentUpon>TasksPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleData\SubjectSampleDataSource\SubjectSampleDataSource.xaml.cs">
+      <DependentUpon>SubjectSampleDataSource.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SampleData\TaskSampleDataSource\TaskSampleDataSource.xaml.cs">
+      <DependentUpon>TaskSampleDataSource.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ScheduleViewModel.cs" />
     <Compile Include="ViewModels\SubjectsViewModel.cs" />
     <Compile Include="ViewModels\SubjectViewModel.cs" />
@@ -141,14 +156,48 @@
     <None Include="HomeworkTaker_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\BadgeLogo.scale-100.png" />
+    <Content Include="Assets\BadgeLogo.scale-200.png" />
+    <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\LockScreenLogo.scale-100.png" />
+    <Content Include="Assets\LockScreenLogo.scale-400.png" />
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-400.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Square310x310Logo.scale-100.png" />
+    <Content Include="Assets\Square310x310Logo.scale-200.png" />
+    <Content Include="Assets\Square310x310Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16_altform-unplated.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256_altform-unplated.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48_altform-unplated.png" />
+    <Content Include="Assets\Square71x71Logo.scale-100.png" />
+    <Content Include="Assets\Square71x71Logo.scale-200.png" />
+    <Content Include="Assets\Square71x71Logo.scale-400.png" />
+    <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-200.png" />
+    <Content Include="Assets\StoreLogo.scale-400.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="SampleData\SubjectSampleDataSource\SubjectSampleDataSource_Files\image01.png" />
+    <Content Include="SampleData\SubjectSampleDataSource\SubjectSampleDataSource_Files\image02.png" />
+    <Content Include="SampleData\SubjectSampleDataSource\SubjectSampleDataSource_Files\image03.png" />
+    <Content Include="SampleData\SubjectSampleDataSource\SubjectSampleDataSource_Files\image04.png" />
+    <Content Include="SampleData\SubjectSampleDataSource\SubjectSampleDataSource_Files\image05.png" />
+    <Content Include="SampleData\TaskSampleDataSource\TaskSampleDataSource_Files\image01.png" />
+    <Content Include="SampleData\TaskSampleDataSource\TaskSampleDataSource_Files\image02.png" />
+    <Content Include="SampleData\TaskSampleDataSource\TaskSampleDataSource_Files\image03.png" />
+    <Content Include="SampleData\TaskSampleDataSource\TaskSampleDataSource_Files\image04.png" />
+    <Content Include="SampleData\TaskSampleDataSource\TaskSampleDataSource_Files\image05.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -186,6 +235,14 @@
     <Page Include="Pages\TasksPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SampleData\SubjectSampleDataSource\SubjectSampleDataSource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SampleData\TaskSampleDataSource\TaskSampleDataSource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup />

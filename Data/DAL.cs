@@ -20,7 +20,7 @@ namespace HomeworkTaker.Data
 
             try
             {
-                var task = Task.Run(async () => { subjectsFile = await Windows.Storage.ApplicationData.Current.LocalFolder.GetFileAsync("subjects.json"); });
+                var task = Task.Run(async () => { subjectsFile = await Windows.Storage.ApplicationData.Current.RoamingFolder.GetFileAsync("subjects.json"); });
                 task.Wait();
                 task = Task.Run(async () => { content = await Windows.Storage.FileIO.ReadTextAsync(subjectsFile); });
                 task.Wait();                
@@ -59,7 +59,7 @@ namespace HomeworkTaker.Data
             subjectsJson["Subjects"] = subjects;
             try
             {
-                var task = Task.Run(async () => { subjectsFile = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFileAsync("subjects.json", Windows.Storage.CreationCollisionOption.ReplaceExisting); });
+                var task = Task.Run(async () => { subjectsFile = await Windows.Storage.ApplicationData.Current.RoamingFolder.CreateFileAsync("subjects.json", Windows.Storage.CreationCollisionOption.ReplaceExisting); });
                 task.Wait();
                 task = Task.Run(async () => { await Windows.Storage.FileIO.WriteTextAsync(subjectsFile, subjectsJson.ToString()); });
                 task.Wait();                
@@ -84,7 +84,7 @@ namespace HomeworkTaker.Data
 
             try
             {
-                var task = Task.Run(async () => { scheduleFile = await Windows.Storage.ApplicationData.Current.LocalFolder.GetFileAsync("schedule.json"); });
+                var task = Task.Run(async () => { scheduleFile = await Windows.Storage.ApplicationData.Current.RoamingFolder.GetFileAsync("schedule.json"); });
                 task.Wait();
                 task = Task.Run(async () => { content = await Windows.Storage.FileIO.ReadTextAsync(scheduleFile); });
                 task.Wait();
@@ -145,7 +145,7 @@ namespace HomeworkTaker.Data
 
             try
             {
-                var task = Task.Run(async () => { scheduleFile = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFileAsync("schedule.json", Windows.Storage.CreationCollisionOption.ReplaceExisting); });
+                var task = Task.Run(async () => { scheduleFile = await Windows.Storage.ApplicationData.Current.RoamingFolder.CreateFileAsync("schedule.json", Windows.Storage.CreationCollisionOption.ReplaceExisting); });
                 task.Wait();
                 task = Task.Run(async () => { await Windows.Storage.FileIO.WriteTextAsync(scheduleFile, scheduleJson.ToString()); });
                 task.Wait();
@@ -170,7 +170,7 @@ namespace HomeworkTaker.Data
 
             try
             {
-                var task = Task.Run(async () => { tasksFile = await Windows.Storage.ApplicationData.Current.LocalFolder.GetFileAsync("tasks.json"); });
+                var task = Task.Run(async () => { tasksFile = await Windows.Storage.ApplicationData.Current.RoamingFolder.GetFileAsync("tasks.json"); });
                 task.Wait();
                 task = Task.Run(async () => { content = await Windows.Storage.FileIO.ReadTextAsync(tasksFile); });
                 task.Wait();
@@ -187,6 +187,7 @@ namespace HomeworkTaker.Data
                 task.Id = (int)(tasksJSON["Tasks"][i]["Id"]);
                 task.Description = (string)(tasksJSON["Tasks"][i]["Description"]);
                 task.Subject = (string)(tasksJSON["Tasks"][i]["Subject"]);
+                task.Notification = DateTime.ParseExact((string)(tasksJSON["Tasks"][i]["Notification"]), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                 task.Deadline = DateTime.ParseExact((string)(tasksJSON["Tasks"][i]["Deadline"]), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                 tasks.Add(task);
             }
@@ -206,13 +207,15 @@ namespace HomeworkTaker.Data
                 task["Id"] = taskList[i].Id;
                 task["Description"] = taskList[i].Description;
                 task["Subject"] = taskList[i].Subject;
+                task["Notification"] = taskList[i].Notification.ToString("yyyy-MM-dd HH:mm:ss");
                 task["Deadline"] = taskList[i].Deadline.ToString("yyyy-MM-dd HH:mm:ss");
                 tasks.Add(task);
             }
+            tasksJson["LastChange"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             tasksJson["Tasks"] = tasks;
             try
             {
-                var task = Task.Run(async () => { tasksFile = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFileAsync("tasks.json", Windows.Storage.CreationCollisionOption.ReplaceExisting); });
+                var task = Task.Run(async () => { tasksFile = await Windows.Storage.ApplicationData.Current.RoamingFolder.CreateFileAsync("tasks.json", Windows.Storage.CreationCollisionOption.ReplaceExisting); });
                 task.Wait();
                 task = Task.Run(async () => { await Windows.Storage.FileIO.WriteTextAsync(tasksFile, tasksJson.ToString()); });
                 task.Wait();
@@ -221,6 +224,27 @@ namespace HomeworkTaker.Data
             {
                 return;
             }
+        }
+
+        public static DateTime LastChange()
+        {
+            JObject tasksJSON;
+            StorageFile tasksFile = null;
+            string content = string.Empty;
+
+            try
+            {
+                var task = Task.Run(async () => { tasksFile = await ApplicationData.Current.RoamingFolder.GetFileAsync("tasks.json"); });
+                task.Wait();
+                task = Task.Run(async () => { content = await FileIO.ReadTextAsync(tasksFile); });
+                task.Wait();
+                tasksJSON = JObject.Parse(content);
+            }
+            catch (Exception)
+            {
+                return DateTime.Now;
+            }
+            return DateTime.ParseExact((string)tasksJSON["LastChange"], "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
         }
     }    
 }

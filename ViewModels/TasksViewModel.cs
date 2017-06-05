@@ -58,7 +58,7 @@ namespace HomeworkTaker.ViewModels
             {
                 var subject = Tasks[SelectedIndex];
                 Tasks.RemoveAt(SelectedIndex);
-                tasks.DeleteSubject(subject);
+                tasks.DeleteTask(subject);
             }
         }        
     }

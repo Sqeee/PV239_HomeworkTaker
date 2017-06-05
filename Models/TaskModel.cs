@@ -11,6 +11,7 @@ namespace HomeworkTaker.Models
         public int Id;
         public string Description;
         public string Subject;
+        public DateTime Notification;
         public DateTime Deadline;
     }
 }

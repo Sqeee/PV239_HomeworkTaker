@@ -12,6 +12,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using HomeworkTaker.Models;
+using HomeworkTaker.Notifications;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -23,10 +25,10 @@ namespace HomeworkTaker.Pages
     public sealed partial class CreateTaskPage : Page
     {
         private string subject;
-        private List<Models.TaskModel> tasks;
+        private TasksModel tasks;
         public CreateTaskPage()
         {
-            tasks = Data.TasksDAL.GetTasks();
+            tasks = new TasksModel();
             this.InitializeComponent();
         }
 
@@ -43,10 +45,12 @@ namespace HomeworkTaker.Pages
         private void onAcceptBtnClick(object sender, RoutedEventArgs e)
         {
             Models.TaskModel task = new Models.TaskModel();
+
             task.Description = descritpionTextBox.Text;
             task.Subject = subject;
-            tasks.Add(task);
-            Data.TasksDAL.StoreTasks(tasks);
+            task.Notification = DateTime.Now.AddSeconds(30); //TODO
+            task.Deadline = DateTime.Now.AddDays(1); //TODO
+            tasks.AddTask(task);
             this.Frame.Navigate(typeof(Pages.SchedulePage));
         }
     }
