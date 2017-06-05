@@ -24,6 +24,16 @@ namespace HomeworkTaker.ViewModels
             get { return This.Subject; }
             set { SetProperty(This.Subject, value, () => This.Subject = value); }
         }
+        public string AssignedDate
+        {
+            get { return This.Assigned.Date.ToString("dd.MM.yyyy"); }
+        }
+
+        public string DeadLineDate
+        {
+            get { return This.Deadline.Date.ToString("dd.MM.yyyy"); }
+        }
+
         public DateTime DeadLine
         {
             get { return This.Deadline; }

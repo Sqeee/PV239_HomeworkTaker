@@ -64,8 +64,12 @@ namespace HomeworkTaker.Pages
             
             // get date of next lesson
             int dayOffset = day + 1;
+            if (dayOffset == 5)
+            {
+                dayOffset = 0;
+            }
             int lessonOffset = 0;
-            int dayCount = 0;
+            int dayCount = 1;
 
             while(schedule.Schedule[dayOffset][lessonOffset]!=subject)
             {

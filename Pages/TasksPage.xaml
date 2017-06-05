@@ -29,6 +29,14 @@
                         <Border BorderBrush="Black" BorderThickness="1">
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="{x:Bind Subject, Mode=OneWay}" Foreground="Black"/>
+                                <TextBlock>
+                                    <Run Text="Assigned: " />
+                                    <Run Text="{x:Bind AssignedDate}" />
+                                </TextBlock>
+                                <TextBlock>
+                                    <Run Text="Deadline: " />
+                                    <Run Text="{x:Bind DeadLineDate}" />
+                                </TextBlock>
                                 <TextBlock Text="{x:Bind Description, Mode=OneWay}" Foreground="Black"/>                                
                             </StackPanel>
                         </Border>
