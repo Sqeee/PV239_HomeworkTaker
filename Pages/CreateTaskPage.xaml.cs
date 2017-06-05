@@ -85,6 +85,11 @@ namespace HomeworkTaker.Pages
                     dayCount++;                        
                 }
             }
+            if(day+dayCount>=5)
+            {
+                dayCount += 2;
+            }
+
             DateTime deadline = assigned.AddDays(dayCount);
             DateTime notification = deadline.Date.AddDays(-1).AddHours(17);            
 
