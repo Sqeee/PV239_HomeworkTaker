@@ -9,22 +9,35 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ScrollViewer>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0">
             <ListView 
                 ItemsSource="{x:Bind Tasks.Tasks, Mode=OneWay}"  
                 SelectedIndex="{x:Bind Tasks.SelectedIndex, Mode=TwoWay}">
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="viewModels:TaskViewModel" >
                         <Border BorderBrush="Black" BorderThickness="1">
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="{x:Bind Subject, Mode=OneWay}" Foreground="Black"/>
-                                <TextBlock Text="{x:Bind Description, Mode=OneWay}" Foreground="Black"/>
-                                <Button Content="Delete" Click="onDeleteBtnClick"/>
+                                <TextBlock Text="{x:Bind Description, Mode=OneWay}" Foreground="Black"/>                                
                             </StackPanel>
                         </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </ScrollViewer>        
+        </ScrollViewer>
+        <CommandBar VerticalAlignment="Bottom" Grid.Row="1">
+            <AppBarButton Icon="Delete" Label="Delete" Click="onDeleteBtnClick"/>            
+        </CommandBar>
     </Grid>
 </Page>

@@ -189,6 +189,7 @@ namespace HomeworkTaker.Data
                 task.Subject = (string)(tasksJSON["Tasks"][i]["Subject"]);
                 task.Notification = DateTime.ParseExact((string)(tasksJSON["Tasks"][i]["Notification"]), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                 task.Deadline = DateTime.ParseExact((string)(tasksJSON["Tasks"][i]["Deadline"]), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                task.Assigned = DateTime.ParseExact((string)(tasksJSON["Tasks"][i]["Assigned"]), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                 tasks.Add(task);
             }
             return tasks;
@@ -209,6 +210,7 @@ namespace HomeworkTaker.Data
                 task["Subject"] = taskList[i].Subject;
                 task["Notification"] = taskList[i].Notification.ToString("yyyy-MM-dd HH:mm:ss");
                 task["Deadline"] = taskList[i].Deadline.ToString("yyyy-MM-dd HH:mm:ss");
+                task["Assigned"] = taskList[i].Assigned.ToString("yyyy-MM-dd HH:mm:ss");
                 tasks.Add(task);
             }
             tasksJson["LastChange"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");

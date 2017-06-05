@@ -26,7 +26,7 @@ namespace HomeworkTaker.Pages.Settings
 
         private void onDeleteBtnClick(object sender, RoutedEventArgs e)
         {
-            Subjects.Delete();
+            Subjects.Delete();            
         }
     }
 }

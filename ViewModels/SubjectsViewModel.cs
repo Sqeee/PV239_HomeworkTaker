@@ -59,6 +59,10 @@ namespace HomeworkTaker.ViewModels
                 var subject = Subjects[SelectedIndex];
                 Subjects.RemoveAt(SelectedIndex);
                 subjects.DeleteSubject(subject);
+
+                Models.ScheduleModel schedule = Data.ScheduleDAL.GetSchedule();
+                schedule.DeleteSubjectFromSchedule(subject.Title);
+                Data.ScheduleDAL.StoreSchedule(schedule);
             }
         }
         public List<string> GetSubjectsTitleList()

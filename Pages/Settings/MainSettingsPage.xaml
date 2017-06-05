@@ -7,8 +7,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button Content="Subjects management" Click="onSubjectsManagementBtnClick"/>
-        <Button Content="Schedule management" Click="onScheduleManagementBtnClick"/>
-    </StackPanel>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border BorderThickness="1" BorderBrush="Black" Grid.Row="0">
+            <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Subjects management" Click="onSubjectsManagementBtnClick"/>
+        </Border>
+        <Border BorderThickness="1" BorderBrush="Black" Grid.Row="1">
+            <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Schedule management" Click="onScheduleManagementBtnClick"/>
+        </Border>
+    </Grid>
 </Page>

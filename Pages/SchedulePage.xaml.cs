@@ -6,15 +6,13 @@ namespace HomeworkTaker.Pages
 {
    // Page used to display schedule
     public sealed partial class SchedulePage : Page
-    {
-        // TODO 
-        // Implement adding of tasks when subject is clicked
+    {   
         private ViewModels.ScheduleViewModel schedule { get; set; }
         private ViewModels.SubjectsViewModel subjects { get; }
 
         public SchedulePage()
         {
-            this.InitializeComponent();
+            this.InitializeComponent();            
             schedule = new ViewModels.ScheduleViewModel();
             subjects = new ViewModels.SubjectsViewModel();
             createSchedule();
@@ -27,7 +25,8 @@ namespace HomeworkTaker.Pages
             {
                 scheduleGrid.ColumnDefinitions.Add(new ColumnDefinition());
                 TextBlock tb = new TextBlock();
-                tb.Text = i.ToString();
+                tb.Text = i.ToString();              
+
                 tb.Foreground = new SolidColorBrush(Windows.UI.Colors.Black);
                 tb.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
                 tb.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
@@ -62,6 +61,7 @@ namespace HomeworkTaker.Pages
                     {
                         Button btn = new Button();
                         btn.Content = subject;
+                        btn.Name = i.ToString() + "," + j.ToString();
                         btn.VerticalAlignment = VerticalAlignment.Stretch;
                         btn.HorizontalAlignment = HorizontalAlignment.Stretch;
                         btn.Click += new RoutedEventHandler(onSubjectBtnClick);
@@ -73,8 +73,8 @@ namespace HomeworkTaker.Pages
 
         private void onSubjectBtnClick(object sender, RoutedEventArgs e)
         {
-            string subject = ((Button)sender).Content as string;
-            this.Frame.Navigate(typeof(Pages.CreateTaskPage),subject);
-        }
+            string name = ((Button)sender).Name as string;
+            this.Frame.Navigate(typeof(Pages.CreateTaskPage),name);
+        }        
     }
 }

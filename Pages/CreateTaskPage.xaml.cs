@@ -23,9 +23,11 @@ namespace HomeworkTaker.Pages
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class CreateTaskPage : Page
-    {
-        private string subject;
+    {        
+        private int day;
+        private int lesson;
         private TasksModel tasks;
+
         public CreateTaskPage()
         {
             tasks = new TasksModel();
@@ -34,7 +36,10 @@ namespace HomeworkTaker.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            subject= e.Parameter as string;
+            //get day and lesson
+            string param = e.Parameter as string;
+            day = Convert.ToInt32(param.Substring(0, param.IndexOf(',')));
+            lesson = Convert.ToInt32(param.Substring(param.IndexOf(',') + 1));
         }
 
         private void onBackBtnClick(object sender, RoutedEventArgs e)
@@ -44,12 +49,48 @@ namespace HomeworkTaker.Pages
 
         private void onAcceptBtnClick(object sender, RoutedEventArgs e)
         {
+            // get DateTime for begining of week
+            DateTime mondayDateTime = DateTime.Now;
+            while (mondayDateTime.DayOfWeek != DayOfWeek.Monday)
+            {
+                mondayDateTime = mondayDateTime.AddDays(-1);
+            }
+
+            ScheduleModel schedule = Data.ScheduleDAL.GetSchedule();
+            string subject = schedule.Schedule[day][lesson];
+
+            // get date when task was assigned;
+            DateTime assigned = mondayDateTime.AddDays(day);
+            
+            // get date of next lesson
+            int dayOffset = day + 1;
+            int lessonOffset = 0;
+            int dayCount = 0;
+
+            while(schedule.Schedule[dayOffset][lessonOffset]!=subject)
+            {
+                lessonOffset++;
+                if(lessonOffset == schedule.MaxHours)
+                {
+                    dayOffset++;
+                    lessonOffset = 0;
+                    if (dayOffset == 5)
+                    {
+                        dayOffset = 0;
+                    }
+                    dayCount++;                        
+                }
+            }
+            DateTime deadline = assigned.AddDays(dayCount);
+            DateTime notification = deadline.Date.AddDays(-1).AddHours(17);            
+
             Models.TaskModel task = new Models.TaskModel();
 
             task.Description = descritpionTextBox.Text;
             task.Subject = subject;
-            task.Notification = DateTime.Now.AddSeconds(30); //TODO
-            task.Deadline = DateTime.Now.AddDays(1); //TODO
+            task.Assigned = assigned.Date;
+            task.Notification = notification;
+            task.Deadline = deadline;
             tasks.AddTask(task);
             this.Frame.Navigate(typeof(Pages.SchedulePage));
         }
