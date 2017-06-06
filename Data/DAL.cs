@@ -39,7 +39,7 @@ namespace HomeworkTaker.Data
                 subj.TitleShort = (string)(subjectsJSON["Subjects"][i]["TitleShort"]);
                 subjectsList.Add(subj);
             }
-            return subjectsList;
+            return subjectsList.OrderBy(s => s.Title).ToList();
         }     
 
         // Store provided list of subjects into json

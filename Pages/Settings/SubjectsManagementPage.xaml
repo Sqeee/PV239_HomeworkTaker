@@ -37,7 +37,6 @@
             </ListView>
         </ScrollViewer>
         <CommandBar VerticalAlignment="Bottom" Grid.Row="1">
-            <AppBarButton Icon="Back" Label="Back" Click="onBackBtnClick"/>
             <AppBarButton Icon="Delete" Label="Delete" Click="onDeleteBtnClick"/>
             <AppBarButton Icon="Add" Label="New" Click="onAddBtnClick" />            
         </CommandBar>

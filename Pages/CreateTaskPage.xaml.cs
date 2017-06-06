@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -31,6 +32,8 @@ namespace HomeworkTaker.Pages
         public CreateTaskPage()
         {
             tasks = new TasksModel();
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            SystemNavigationManager.GetForCurrentView().BackRequested += onBackBtnClick;
             this.InitializeComponent();
         }
 
@@ -42,9 +45,23 @@ namespace HomeworkTaker.Pages
             lesson = Convert.ToInt32(param.Substring(param.IndexOf(',') + 1));
         }
 
-        private void onBackBtnClick(object sender, RoutedEventArgs e)
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            this.Frame.Navigate(typeof(Pages.SchedulePage));
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            SystemNavigationManager.GetForCurrentView().BackRequested -= onBackBtnClick;
+        }
+
+        private void onBackBtnClick(object sender, BackRequestedEventArgs e)
+        {
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
+            else
+            {
+                this.Frame.Navigate(typeof(Pages.SchedulePage));
+            }
+            e.Handled = true;
         }
 
         private void onIncreaseClick(object sender, RoutedEventArgs e)

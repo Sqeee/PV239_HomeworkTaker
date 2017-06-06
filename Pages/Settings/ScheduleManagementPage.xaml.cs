@@ -5,6 +5,9 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
+using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -12,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Toolkit.Uwp.UI.Extensions;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,6 +29,8 @@ namespace HomeworkTaker.Pages.Settings
         public ScheduleManagementPage()
         {
             this.InitializeComponent();
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            SystemNavigationManager.GetForCurrentView().BackRequested += onBackBtnClick;
             subjects = new ViewModels.SubjectsViewModel();
             schedule = new ViewModels.ScheduleViewModel();
             resetSchedule();
@@ -32,6 +38,12 @@ namespace HomeworkTaker.Pages.Settings
             {
                 DisplayMissingSettings();
             }
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            SystemNavigationManager.GetForCurrentView().BackRequested -= onBackBtnClick;
         }
 
         private void deleteSchedule()
@@ -102,14 +114,9 @@ namespace HomeworkTaker.Pages.Settings
                 acceptBtn.Icon = new SymbolIcon(Symbol.Accept);
                 acceptBtn.Label = "Accept";
                 acceptBtn.Click += onAcceptBtnClick;
-                AppBarButton backBtn = new AppBarButton();
-                backBtn.Icon = new SymbolIcon(Symbol.Back);
-                backBtn.Label = "Back";
-                backBtn.Click += onBackBtnClick;
                 CommandBar cb = new CommandBar();
                 cb.Name = "commandBar";
                 cb.VerticalAlignment = VerticalAlignment.Bottom;
-                cb.PrimaryCommands.Add(backBtn);
                 cb.PrimaryCommands.Add(acceptBtn);                
                 cb.SetValue(Grid.RowProperty, 7);
                 cb.SetValue(Grid.ColumnProperty, 0);
@@ -225,9 +232,17 @@ namespace HomeworkTaker.Pages.Settings
             this.Frame.Navigate(typeof(Pages.Settings.MainSettingsPage));
         }
 
-        private void onBackBtnClick(object sender, RoutedEventArgs e)
+        private void onBackBtnClick(object sender, BackRequestedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Pages.Settings.MainSettingsPage));
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
+            else
+            {
+                this.Frame.Navigate(typeof(Pages.Settings.MainSettingsPage));
+            }
+            e.Handled = true;
         }
 
         private async void DisplayMissingSettings()

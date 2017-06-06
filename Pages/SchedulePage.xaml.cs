@@ -1,7 +1,9 @@
 ﻿using System;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
 
 namespace HomeworkTaker.Pages
 {
@@ -16,12 +18,27 @@ namespace HomeworkTaker.Pages
         public SchedulePage()
         {
             this.InitializeComponent();
+            SystemNavigationManager.GetForCurrentView().BackRequested += onBackBtnClick;
             schedule = new ViewModels.ScheduleViewModel();
             subjects = new ViewModels.SubjectsViewModel();
             createSchedule();
             if (!subjectExists)
             {
                 DisplayMissingSettings();
+            }
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            SystemNavigationManager.GetForCurrentView().BackRequested -= onBackBtnClick;
+        }
+
+        private void onBackBtnClick(object sender, BackRequestedEventArgs e)
+        {
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+                e.Handled = true;
             }
         }
 
@@ -68,7 +85,10 @@ namespace HomeworkTaker.Pages
                     if (subject != string.Empty)
                     {
                         Button btn = new Button();
-                        btn.Content = subject;
+                        TextBlock txtBlock = new TextBlock();
+                        txtBlock.Text = subject;
+                        txtBlock.TextWrapping = TextWrapping.WrapWholeWords;
+                        btn.Content = txtBlock;
                         btn.Name = i.ToString() + "," + j.ToString();
                         btn.VerticalAlignment = VerticalAlignment.Stretch;
                         btn.HorizontalAlignment = HorizontalAlignment.Stretch;

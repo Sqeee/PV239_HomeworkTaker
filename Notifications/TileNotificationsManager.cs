@@ -16,7 +16,7 @@ namespace HomeworkTaker.Notifications
         {
             string source = $@"
 <tile>
-    <visual>
+    <visual branding='nameAndLogo'>
         <binding template='TileSmall'>
             <text>{task.Subject}</text>
             <text hint-style='captionSubtle' hint-wrap='true'>{task.Description}</text>

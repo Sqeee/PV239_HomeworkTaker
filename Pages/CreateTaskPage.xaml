@@ -28,7 +28,6 @@
     </Grid>
     <Page.BottomAppBar>
         <CommandBar Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2">
-            <AppBarButton Icon="Back" Label="Back" Click="onBackBtnClick"/>
             <AppBarButton Icon="Accept" Label="Accept" Click="onAcceptBtnClick"/>
         </CommandBar>
     </Page.BottomAppBar>
