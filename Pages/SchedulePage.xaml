@@ -20,24 +20,24 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
-        <Border BorderBrush="Black" BorderThickness="1" Background="Gray" Grid.Column="0" Grid.Row="0">
-            <TextBlock Text="Schedule" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <Border BorderBrush="Black" BorderThickness="1" Background="LightGray" Grid.Column="0" Grid.Row="0">
+            <TextBlock Text="Hour" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold"/>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="1" Background="Gray" Grid.Column="0" Grid.Row="1">
-            <TextBlock Text="Monday" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Border BorderBrush="Black" BorderThickness="1" Background="LightGray" Grid.Column="0" Grid.Row="1">
+            <TextBlock Text="Mon" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold"/>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="1" Background="Gray" Grid.Column="0" Grid.Row="2">
-            <TextBlock Text="Tuesday" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Border BorderBrush="Black" BorderThickness="1" Background="LightGray" Grid.Column="0" Grid.Row="2">
+            <TextBlock Text="Tue" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold"/>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="1" Background="Gray" Grid.Column="0" Grid.Row="3">
-            <TextBlock Text="Wednesday" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Border BorderBrush="Black" BorderThickness="1" Background="LightGray" Grid.Column="0" Grid.Row="3">
+            <TextBlock Text="Wed" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold"/>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="1" Background="Gray" Grid.Column="0" Grid.Row="4">
-            <TextBlock Text="Thursday" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Border BorderBrush="Black" BorderThickness="1" Background="LightGray" Grid.Column="0" Grid.Row="4">
+            <TextBlock Text="Thu" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold"/>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="1" Background="Gray" Grid.Column="0" Grid.Row="5">
-            <TextBlock Text="Friday" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Border BorderBrush="Black" BorderThickness="1" Background="LightGray" Grid.Column="0" Grid.Row="5">
+            <TextBlock Text="Fri" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold"/>
         </Border>
     </Grid>
 </Page>

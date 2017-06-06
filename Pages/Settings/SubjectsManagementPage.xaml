@@ -14,7 +14,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <ScrollViewer Grid.Row="0">
-            <ListView 
+            <ListView
                 ItemsSource="{x:Bind Subjects.Subjects, Mode=OneWay}"  
                 SelectedIndex="{x:Bind Subjects.SelectedIndex, Mode=TwoWay}">
                 
@@ -26,10 +26,10 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="viewModels:SubjectViewModel" >
-                        <Border BorderBrush="Black" BorderThickness="1">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{x:Bind Title, Mode=OneWay}" Foreground="Black"/>
-                                    <TextBlock Text="{x:Bind TitleShort, Mode=OneWay}" Foreground="Black"/>
+                        <Border BorderBrush="Black" BorderThickness="1" Margin="0, 4, 10, 4">
+                            <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{x:Bind Title, Mode=OneWay}" Foreground="Black" Style="{StaticResource TitleTextBlockStyle}" Margin="10, 10, 10, 0" FontWeight="SemiBold"/>
+                                    <TextBlock Text="{x:Bind TitleShort, Mode=OneWay}" Foreground="Black" Style="{StaticResource SubtitleTextBlockStyle}" Margin="10, 5, 10, 10"/>
                                 </StackPanel>
                             </Border>
                     </DataTemplate>
@@ -37,8 +37,8 @@
             </ListView>
         </ScrollViewer>
         <CommandBar VerticalAlignment="Bottom" Grid.Row="1">
-            <AppBarButton Icon="Delete" Label="Delete" Click="onDeleteBtnClick"/>
             <AppBarButton Icon="Back" Label="Back" Click="onBackBtnClick"/>
+            <AppBarButton Icon="Delete" Label="Delete" Click="onDeleteBtnClick"/>
             <AppBarButton Icon="Add" Label="New" Click="onAddBtnClick" />            
         </CommandBar>
     </Grid>

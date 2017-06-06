@@ -37,9 +37,10 @@ namespace HomeworkTaker.Pages
                 tb.Foreground = new SolidColorBrush(Windows.UI.Colors.Black);
                 tb.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
                 tb.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
+                tb.FontWeight = Windows.UI.Text.FontWeights.SemiBold;
                 Border b = new Border();
                 b.Child = tb;
-                b.Background = new SolidColorBrush(Windows.UI.Colors.Gray);
+                b.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
                 b.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Black);
                 b.BorderThickness = new Thickness(1);
                 scheduleGrid.Children.Add(b);
@@ -71,6 +72,7 @@ namespace HomeworkTaker.Pages
                         btn.Name = i.ToString() + "," + j.ToString();
                         btn.VerticalAlignment = VerticalAlignment.Stretch;
                         btn.HorizontalAlignment = HorizontalAlignment.Stretch;
+                        btn.Background = new SolidColorBrush(Windows.UI.Colors.White);
                         btn.Click += new RoutedEventHandler(onSubjectBtnClick);
                         b.Child = btn;
                         subjectExists = true;

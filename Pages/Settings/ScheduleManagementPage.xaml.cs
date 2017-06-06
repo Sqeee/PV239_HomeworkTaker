@@ -77,21 +77,22 @@ namespace HomeworkTaker.Pages.Settings
                 string text = string.Empty;
                 switch(i)
                 {
-                    case 1: text = "Schedule"; break;
-                    case 2: text = "Monday"; break;
-                    case 3: text = "Tuesday"; break;
-                    case 4: text = "Wednesday"; break;
-                    case 5: text = "Thursday"; break;
-                    case 6: text = "Friday"; break;
+                    case 1: text = "Hour"; break;
+                    case 2: text = "Mon"; break;
+                    case 3: text = "Tue"; break;
+                    case 4: text = "Wed"; break;
+                    case 5: text = "Thu"; break;
+                    case 6: text = "Fri"; break;
                 }
                 TextBlock tb = new TextBlock();
                 tb.Text = text;
                 tb.Foreground = new SolidColorBrush(Windows.UI.Colors.Black);
                 tb.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
                 tb.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
+                tb.FontWeight = Windows.UI.Text.FontWeights.SemiBold;
                 Border b = new Border();
                 b.Child = tb;
-                b.Background = new SolidColorBrush(Windows.UI.Colors.Gray);
+                b.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
                 b.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Black);
                 b.BorderThickness = new Thickness(1);
                 b.SetValue(Grid.ColumnProperty, 0);
@@ -133,9 +134,10 @@ namespace HomeworkTaker.Pages.Settings
                 tb.Foreground = new SolidColorBrush(Windows.UI.Colors.Black);
                 tb.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
                 tb.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
+                tb.FontWeight = Windows.UI.Text.FontWeights.SemiBold;
                 Border b = new Border();
                 b.Child = tb;
-                b.Background = new SolidColorBrush(Windows.UI.Colors.Gray);
+                b.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
                 b.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Black);
                 b.BorderThickness = new Thickness(1);
                 scheduleGrid.Children.Add(b);
@@ -233,8 +235,9 @@ namespace HomeworkTaker.Pages.Settings
             ContentDialog dialog = new ContentDialog()
             {
                 Title = "Missing subjects",
-                Content = "You have not provided your subjects. Please go to settings - Subjects management.",
+                Content = "You have not provided your subjects. Please go to settings - Manage your subjects.",
                 PrimaryButtonText = "OK"
+            
             };
 
             await dialog.ShowAsync();

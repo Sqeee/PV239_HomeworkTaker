@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -15,11 +15,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Border BorderThickness="1" BorderBrush="Black" Grid.Row="0">
-            <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Subjects management" Click="onSubjectsManagementBtnClick"/>
-        </Border>
-        <Border BorderThickness="1" BorderBrush="Black" Grid.Row="1">
-            <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Schedule management" Click="onScheduleManagementBtnClick"/>
-        </Border>
-    </Grid>
+        <Button Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Manage your subjects" Click="onSubjectsManagementBtnClick" Background="White" FontWeight="SemiBold" Margin="10, 10, 10, 5" BorderBrush="Black" BorderThickness="1"/>
+        <Button Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Manage your schedule" Click="onScheduleManagementBtnClick" Background="White" FontWeight="SemiBold" Margin="10, 5, 10, 10" BorderBrush="Black" BorderThickness="1"/>
+    </Background>
 </Page>
