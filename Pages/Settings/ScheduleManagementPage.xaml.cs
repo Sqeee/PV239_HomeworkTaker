@@ -28,6 +28,10 @@ namespace HomeworkTaker.Pages.Settings
             subjects = new ViewModels.SubjectsViewModel();
             schedule = new ViewModels.ScheduleViewModel();
             resetSchedule();
+            if (subjects.Subjects.Count == 0)
+            {
+                DisplayMissingSettings();
+            }
         }
 
         private void deleteSchedule()
@@ -58,13 +62,16 @@ namespace HomeworkTaker.Pages.Settings
             txt.SetValue(Grid.ColumnProperty, 0);
             txt.SetValue(Grid.RowProperty, 0);
             scheduleGrid.Children.Add(txt);
-            TextBox txtBox = new TextBox();
-            txtBox.Name = "MaxHoursTextBox";
-            txtBox.LostFocus += onMaxHoursChanged;
-            txtBox.Foreground = new SolidColorBrush(Windows.UI.Colors.Black);
-            txtBox.SetValue(Grid.ColumnProperty, 1);
-            txtBox.SetValue(Grid.RowProperty, 0);
-            scheduleGrid.Children.Add(txtBox);
+            ComboBox comboBox = new ComboBox();
+            comboBox.Name = "MaxHoursComboBox";
+            for (int i = 1; i <= 10; i++)
+            {
+                comboBox.Items.Add(i);
+            }
+            comboBox.SelectionChanged += onMaxHoursChanged;
+            comboBox.SetValue(Grid.ColumnProperty, 1);
+            comboBox.SetValue(Grid.RowProperty, 0);
+            scheduleGrid.Children.Add(comboBox);
             for(int i=1;i<7;i++)
             {
                 string text = string.Empty;
@@ -183,7 +190,7 @@ namespace HomeworkTaker.Pages.Settings
             int maxHours = 0;
             try
             {
-                maxHours = Convert.ToInt32(((TextBox)sender).Text);
+                maxHours = Convert.ToInt32(((ComboBox)sender).SelectedValue);
             }
             catch (Exception ex)
             {
@@ -221,6 +228,16 @@ namespace HomeworkTaker.Pages.Settings
             this.Frame.Navigate(typeof(Pages.Settings.MainSettingsPage));
         }
 
+        private async void DisplayMissingSettings()
+        {
+            ContentDialog dialog = new ContentDialog()
+            {
+                Title = "Missing subjects",
+                Content = "You have not provided your subjects. Please go to settings - Subjects management.",
+                PrimaryButtonText = "OK"
+            };
 
+            await dialog.ShowAsync();
+        }
     }
 }

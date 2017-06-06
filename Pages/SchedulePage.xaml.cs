@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
@@ -10,12 +11,18 @@ namespace HomeworkTaker.Pages
         private ViewModels.ScheduleViewModel schedule { get; set; }
         private ViewModels.SubjectsViewModel subjects { get; }
 
+        private bool subjectExists = false;
+
         public SchedulePage()
         {
-            this.InitializeComponent();            
+            this.InitializeComponent();
             schedule = new ViewModels.ScheduleViewModel();
             subjects = new ViewModels.SubjectsViewModel();
             createSchedule();
+            if (!subjectExists)
+            {
+                DisplayMissingSettings();
+            }
         }
 
         private void createSchedule()
@@ -66,6 +73,7 @@ namespace HomeworkTaker.Pages
                         btn.HorizontalAlignment = HorizontalAlignment.Stretch;
                         btn.Click += new RoutedEventHandler(onSubjectBtnClick);
                         b.Child = btn;
+                        subjectExists = true;
                     }
                 }
             }
@@ -75,6 +83,18 @@ namespace HomeworkTaker.Pages
         {
             string name = ((Button)sender).Name as string;
             this.Frame.Navigate(typeof(Pages.CreateTaskPage),name);
-        }        
+        }
+
+        private async void DisplayMissingSettings()
+        {
+            ContentDialog dialog = new ContentDialog()
+            {
+                Title = "Missing subjects and schedule",
+                Content = "You have not provided your subjects or prepared your schedule. Please go to settings.",
+                PrimaryButtonText = "OK"
+            };
+
+            await dialog.ShowAsync();
+        }
     }
 }

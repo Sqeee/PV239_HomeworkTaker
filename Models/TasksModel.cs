@@ -13,13 +13,14 @@ namespace HomeworkTaker.Models
 
         public TasksModel()
         {
-            TasksList = Data.TasksDAL.GetTasks();
+            TasksList = Data.TasksDAL.GetTasks().OrderBy(t => t.Deadline).ToList();
         }
 
         public void AddTask(Models.TaskModel newTask)
         {
             newTask.Id = getNextFreeId();
             TasksList.Add(newTask);
+            TasksList = TasksList.OrderBy(t => t.Deadline).ToList();
             Data.TasksDAL.StoreTasks(TasksList);
             NotificationsManager.AddTaskNotification(newTask);
         }
